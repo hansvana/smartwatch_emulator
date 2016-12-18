@@ -7,7 +7,7 @@ Only works on websites that allow themselves to be shown in an iframe.
 
 ## How to install
 
-1. Press `Clone or download` > `Download ZIP`
+1. [Download the ZIP file](https://github.com/hansvana/smartwatch_emulator/archive/master.zip)
 1. Unpack the downloaded zip file into a new folder.
 1. In Chrome, go to `Settings` > `Extensions`
 1. Enable `Developer Mode`
