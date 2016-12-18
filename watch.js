@@ -13,7 +13,7 @@ var faces = {
     imgWidth: 850,
     imgHeight: 1016
   }
-}
+};
 
 function changeFace(val) {
   var frame = document.getElementById("watchframe");
@@ -35,7 +35,7 @@ function changeFace(val) {
   localStorage.setItem("watch_face", val);
 }
 
-var face = localStorage.getItem("watch_face")
+var face = localStorage.getItem("watch_face");
 
 changeFace(face ? face : "apple");
 
@@ -61,7 +61,7 @@ function getFromStorage() {
 
 var src = getFromStorage();
 
-chrome.runtime.sendMessage({action: "geturl"}, null, function(response) {
+chrome.runtime.sendMessage({action: "geturl"}, function(response) {
   chrome.tabs.getCurrent( function(tab) {
     if (src && src.id === tab.id) {
       document.getElementById("watchframe").src = src.url;
