@@ -1,10 +1,3 @@
-var radioElements = document.getElementsByName("face");
-for(var i = 0; i < radioElements.length; i++){
-    radioElements[i].addEventListener("change", function(e) {
-      changeFace(e.srcElement.value);
-    });
-}
-
 var faces = {
   apple : {
     width: 272,
@@ -34,7 +27,7 @@ function changeFace(val) {
     frame.style.marginTop = - props.height/2 +"px";
     overlay.style.width = props.imgWidth +"px";
     overlay.style.height = props.imgHeight +"px";
-    overlay.style.marginLeft = - props.imgWidth/2 +"px";
+    overlay.style.marginLeft = - (props.imgWidth/2 - 1) +"px";
     overlay.style.marginTop = - props.imgHeight/2 +"px";
     overlay.style.backgroundImage = "url(img/"+props.image+")";
   }
@@ -45,6 +38,16 @@ function changeFace(val) {
 var face = localStorage.getItem("watch_face")
 
 changeFace(face ? face : "apple");
+
+var radioElements = document.getElementsByName("face");
+for(var i = 0; i < radioElements.length; i++){
+    if (radioElements[i].value === face) {
+      radioElements[i].checked = true;
+    }
+    radioElements[i].addEventListener("change", function(e) {
+      changeFace(e.srcElement.value);
+    });
+}
 
 function getFromStorage() {
     var src;
