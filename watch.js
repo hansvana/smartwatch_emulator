@@ -61,15 +61,14 @@ function getFromStorage() {
 
 var src = getFromStorage();
 
-chrome.runtime.sendMessage({action: "geturl"}, function(response) {
+chrome.runtime.sendMessage({action: "geturl"}, null, function(response) {
   chrome.tabs.getCurrent( function(tab) {
     if (src && src.id === tab.id) {
       document.getElementById("watchframe").src = src.url;
     } else {
-
-          console.log("response",response);
-          document.getElementById("watchframe").src = response.url;
-          localStorage.setItem("watchSrc", JSON.stringify({id: tab.id, url: response.url}));
+      console.log("response",response);
+      document.getElementById("watchframe").src = response.url;
+      localStorage.setItem("watchSrc", JSON.stringify({id: tab.id, url: response.url}));
     }
   });
 });
