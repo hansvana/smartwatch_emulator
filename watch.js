@@ -61,14 +61,25 @@ function getFromStorage() {
 
 var src = getFromStorage();
 
-chrome.runtime.sendMessage({action: "geturl"}, function(response) {
-  chrome.tabs.getCurrent( function(tab) {
-    if (src && src.id === tab.id) {
-      document.getElementById("watchframe").src = src.url;
-    } else {
-      console.log("response",response);
-      document.getElementById("watchframe").src = response.url;
-      localStorage.setItem("watchSrc", JSON.stringify({id: tab.id, url: response.url}));
+var params = {};
+
+if (location.search) {
+    var parts = location.search.substring(1).split('&');
+
+    for (var i = 0; i < parts.length; i++) {
+        var nv = parts[i].split('=');
+        if (!nv[0]) continue;
+        params[nv[0]] = nv[1] || true;
     }
-  });
+}
+
+var url = params.url;
+
+chrome.tabs.getCurrent( function(tab) {
+  if (src && src.id === tab.id) {
+    document.getElementById("watchframe").src = src.url;
+  } else {
+    document.getElementById("watchframe").src = params.url;
+    localStorage.setItem("watchSrc", JSON.stringify({id: tab.id, url: params.url}));
+  }
 });
